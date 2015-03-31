@@ -7,9 +7,12 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="TipViewController">
             <connections>
                 <outlet property="billTextFeild" destination="xEp-LV-HLN" id="Zsa-3J-c6z"/>
-                <outlet property="noOfPeople" destination="Iig-cm-9v6" id="dBy-pE-hti"/>
-                <outlet property="tipControl" destination="GrZ-i2-oVB" id="lho-XX-xrH"/>
+                <outlet property="eachPays" destination="pQU-wc-Hh4" id="1La-o7-Mkm"/>
+                <outlet property="noOfPeople" destination="FBi-9Y-REL" id="k5d-Bv-lRT"/>
+                <outlet property="noOfPeopleSlider" destination="UbS-eS-48w" id="m3a-tS-XyR"/>
+                <outlet property="tip" destination="5Oz-3V-r8A" id="BoY-75-5wZ"/>
                 <outlet property="tipLabel" destination="0Pp-4r-Fwk" id="SSo-M2-P3e"/>
+                <outlet property="tipSlider" destination="M1W-T9-2mW" id="wBI-d2-yO7"/>
                 <outlet property="tipTotal" destination="v1G-qr-6SZ" id="2TS-Ln-Ukg"/>
                 <outlet property="view" destination="iN0-l3-epB" id="E6K-F5-ZYb"/>
             </connections>
@@ -36,6 +39,9 @@
                     <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                     <fontDescription key="fontDescription" type="system" weight="medium" pointSize="14"/>
                     <textInputTraits key="textInputTraits" keyboardType="decimalPad"/>
+                    <connections>
+                        <action selector="textFieldEdit:" destination="-1" eventType="editingDidBegin" id="c61-QB-jC8"/>
+                    </connections>
                 </textField>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="$3.3" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0Pp-4r-Fwk">
                     <rect key="frame" x="213" y="130" width="89" height="21"/>
@@ -74,30 +80,42 @@
                     <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <segmentedControl opaque="NO" contentMode="scaleAspectFit" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bordered" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="GrZ-i2-oVB">
-                    <rect key="frame" x="24" y="320" width="278" height="29"/>
-                    <segments>
-                        <segment title="10%"/>
-                        <segment title="15%"/>
-                        <segment title="20%"/>
-                    </segments>
-                    <color key="tintColor" red="0.0" green="0.016062608867891903" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                <slider opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="5" minValue="5" maxValue="25" translatesAutoresizingMaskIntoConstraints="NO" id="M1W-T9-2mW">
+                    <rect key="frame" x="22" y="323" width="213" height="31"/>
                     <connections>
-                        <action selector="onTap:" destination="-1" eventType="valueChanged" id="Dd1-Ku-CMS"/>
+                        <action selector="slideValueChange:" destination="-1" eventType="valueChanged" id="pgM-XA-Teo"/>
                     </connections>
-                </segmentedControl>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="$0.0" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aYH-4v-wPp">
-                    <rect key="frame" x="235" y="281" width="67" height="21"/>
-                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
+                </slider>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="0" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5Oz-3V-r8A">
+                    <rect key="frame" x="227" y="327" width="52" height="21"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="1" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Iig-cm-9v6">
-                    <rect key="frame" x="257" y="155" width="45" height="30"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="%" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="slk-Yk-IZ8">
+                    <rect key="frame" x="284" y="327" width="18" height="21"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="14"/>
-                    <textInputTraits key="textInputTraits"/>
-                </textField>
+                    <nil key="highlightedColor"/>
+                </label>
+                <slider opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="1" minValue="1" maxValue="15" translatesAutoresizingMaskIntoConstraints="NO" id="UbS-eS-48w">
+                    <rect key="frame" x="129" y="163" width="125" height="31"/>
+                    <connections>
+                        <action selector="noOfPeopleChange:" destination="-1" eventType="valueChanged" id="oB6-td-xir"/>
+                    </connections>
+                </slider>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="1" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FBi-9Y-REL">
+                    <rect key="frame" x="260" y="167" width="42" height="21"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="$0.0" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pQU-wc-Hh4">
+                    <rect key="frame" x="233" y="282" width="69" height="21"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                    <nil key="highlightedColor"/>
+                </label>
             </subviews>
             <color key="backgroundColor" red="0.41680036807835619" green="1" blue="0.64729849819962104" alpha="1" colorSpace="calibratedRGB"/>
             <rect key="contentStretch" x="0.10000000000000001" y="0.0" width="1" height="1"/>
@@ -105,7 +123,7 @@
             <connections>
                 <outletCollection property="gestureRecognizers" destination="ef7-Xy-nAr" appends="YES" id="Sgb-5x-v6V"/>
             </connections>
-            <point key="canvasLocation" x="142" y="177"/>
+            <point key="canvasLocation" x="207" y="202"/>
         </view>
         <tapGestureRecognizer id="ef7-Xy-nAr">
             <connections>

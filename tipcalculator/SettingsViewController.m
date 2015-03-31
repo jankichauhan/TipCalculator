@@ -10,16 +10,22 @@
 @interface SettingsViewController ()
 
 @property (weak, nonatomic) IBOutlet UISegmentedControl *defaultTipAmount;
+@property (weak, nonatomic) IBOutlet UISlider *tipSlider;
+@property (weak, nonatomic) IBOutlet UILabel *tip;
 @end
 
 @implementation SettingsViewController
 
+
+
 - (void)viewDidLoad {
     self.title = @"Settings";
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    int intValue = [defaults integerForKey:@"Default Tip"];
-    NSLog(@"Tip index %d", intValue);
-    self.defaultTipAmount.selectedSegmentIndex = intValue;
+    //int intValue = [defaults integerForKey:@"Default Tip"];
+    float tipValue = [defaults floatForKey:@"Default Tip"];
+    NSLog(@"Tip value %f", tipValue);
+   // self.defaultTipAmount.selectedSegmentIndex = intValue;
+    self.tipSlider.value = tipValue;
     [self setTipControllerValue];
 }
 
@@ -48,10 +54,16 @@
     [self setTipControllerValue];
 }
 
+- (IBAction)sliderValueChange:(id)sender {
+    NSLog(@"Tip Percentage %f", self.tipSlider.value);
+    self.tip.text = [NSString stringWithFormat:@"%0.1f", self.tipSlider.value];
+    [self setTipControllerValue];
+}
+
 -(void)setTipControllerValue{
 
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    [defaults setInteger:self.defaultTipAmount.selectedSegmentIndex forKey:@"Default Tip"];
+    [defaults setFloat:self.tipSlider.value forKey:@"Default Tip"];
     [defaults synchronize];
 }
 

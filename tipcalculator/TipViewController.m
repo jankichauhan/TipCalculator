@@ -15,8 +15,12 @@
 @property (weak, nonatomic) IBOutlet UILabel *tipLabel;
 @property (weak, nonatomic) IBOutlet UILabel *tipTotal;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *tipControl;
-@property (weak, nonatomic) IBOutlet UILabel *individualAmount;
-@property (weak, nonatomic) IBOutlet UITextField *noOfPeople;
+@property (weak, nonatomic) IBOutlet UISlider *tipSlider;
+@property (weak, nonatomic) IBOutlet UILabel *tip;
+@property (weak, nonatomic) IBOutlet UISlider *noOfPeopleSlider;
+@property (weak, nonatomic) IBOutlet UILabel *noOfPeople;
+@property (weak, nonatomic) IBOutlet UILabel *eachPays;
+
 
 - (IBAction)onTap:(id)sender;
 - (void)updateValues;
@@ -25,7 +29,7 @@
 
 @implementation TipViewController
 
-
+NSString *currencySymbol;
 
 -(id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -36,6 +40,7 @@
     return self;
 }
 - (void)viewDidLoad {
+    currencySymbol = [[NSLocale currentLocale] objectForKey:NSLocaleCurrencySymbol];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Settings" style:UIBarButtonItemStylePlain target:self action:@selector(onSettingsButton)];
 
     [super viewDidLoad];
@@ -45,14 +50,37 @@
 - (void)viewWillAppear:(BOOL)animated {
     NSLog(@"view will appear");
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    int intValue = [defaults integerForKey:@"Default Tip"];
-    NSLog(@"Tip index %d", intValue);
-    self.tipControl.selectedSegmentIndex = intValue;
+    float tipValue = [defaults floatForKey:@"Default Tip"];
+    NSLog(@"Tip index %f", tipValue);
+    self.tipSlider.value = tipValue;
+    self.tip.text = [NSString stringWithFormat:@"%0.1f", self.tipSlider.value];
+    
     [self updateValues];
+}
+- (IBAction)textFieldEdit:(id)sender {
+    self.billTextFeild.text = @"";
 }
 
 - (void)viewDidAppear:(BOOL)animated {
     NSLog(@"view did appear");
+    NSUserDefaults *defaultsForAppRestart = [NSUserDefaults standardUserDefaults];
+    NSDate *dateOne = [defaultsForAppRestart valueForKey:@"Ten Mins After"];
+    NSDate *dateTwo = [NSDate date];
+    NSLog(@" Date one %@ date Two %@", dateOne, dateTwo);
+
+    switch ([dateOne compare:dateTwo]) {
+        case NSOrderedAscending:
+            // dateOne is earlier in time than dateTwo
+            break;
+        case NSOrderedSame:
+            // The dates are the same
+            break;
+        case NSOrderedDescending:
+            // dateOne is later in time than dateTwo
+            self.billTextFeild.text = [NSString stringWithFormat:@"%f", [defaultsForAppRestart floatForKey:@"Last Bill Amount"]];
+            break;
+    }
+
 
 }
 
@@ -74,17 +102,40 @@
     [self updateValues];
 }
 
+- (IBAction)slideValueChange:(id)sender {
+    NSLog(@"Tip Percentage %f", self.tipSlider.value);
+    self.tip.text = [NSString stringWithFormat:@"%0.1f", self.tipSlider.value];
+    [self updateValues];
+}
+
+- (IBAction)noOfPeopleChange:(id)sender {
+    int noOfPeople = (int) self.noOfPeopleSlider.value;
+    self.noOfPeople.text = [NSString stringWithFormat:@"%d", noOfPeople];
+    [self updateValues];
+}
+
+
 - (void)updateValues{
+    
+    NSDate *todayDate = [NSDate date];
+    NSDate *tenMinsAfter = [NSDate dateWithTimeInterval:600 sinceDate:todayDate];
+    
     float billAmount = [self.billTextFeild.text floatValue];
     
-    NSArray *tipValues = @[@(0.1), @(0.15), @(0.2)];
-    float tipAmount = billAmount * [tipValues[self.tipControl.selectedSegmentIndex] floatValue];
-    int noOfPeople = [self.noOfPeople.text integerValue];
+    float tipAmount = (billAmount * self.tipSlider.value) / 100 ;
+    int totalNoPeople = [self.noOfPeople.text integerValue];
     float totalAmount = tipAmount + billAmount;
+    float inidividualAmout = totalAmount/totalNoPeople;
     
-    self.tipLabel.text = [NSString stringWithFormat:@"$%0.2f", tipAmount];
-    self.tipTotal.text = [NSString stringWithFormat:@"$%0.2f", totalAmount];
-    self.individualAmount.text = [NSString stringWithFormat:@"$%0.2f", totalAmount/noOfPeople];
+    self.tipLabel.text = [NSString stringWithFormat:@"%@ %0.2f", currencySymbol, tipAmount];
+    self.tipTotal.text = [NSString stringWithFormat:@"%@ %0.2f", currencySymbol, totalAmount];
+    self.eachPays.text = [NSString stringWithFormat:@"%@ %0.2f", currencySymbol, inidividualAmout];
+    
+    NSUserDefaults *defaultsForAppRestart = [NSUserDefaults standardUserDefaults];
+    [defaultsForAppRestart setFloat:[self.billTextFeild.text floatValue] forKey:@"Last Bill Amount"];
+    [defaultsForAppRestart setValue:tenMinsAfter forKey:@"Ten Mins After"];
+    [defaultsForAppRestart synchronize];
+    
 }
 
 - (void)onSettingsButton{
