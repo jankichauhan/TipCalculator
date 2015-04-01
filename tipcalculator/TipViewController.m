@@ -120,11 +120,15 @@ NSString *currencySymbol;
             // dateOne is earlier in time than dateTwo
             NSLog(@" In NSOrderedAscending ");
             self.billTextFeild.text = @"";
+            [self updateValues];
+            [self.billTextFeild becomeFirstResponder];
             break;
         case NSOrderedSame:
             // The dates are the same
             NSLog(@" In NSOrderedSame ");
             self.billTextFeild.text = @"";
+            [self updateValues];
+            [self.billTextFeild becomeFirstResponder];
             break;
         case NSOrderedDescending:
             // dateOne is later in time than dateTwo
