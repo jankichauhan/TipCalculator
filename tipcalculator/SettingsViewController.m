@@ -26,6 +26,7 @@
     NSLog(@"Tip value %f", tipValue);
    // self.defaultTipAmount.selectedSegmentIndex = intValue;
     self.tipSlider.value = tipValue;
+    self.tip.text = [NSString stringWithFormat:@"%0.1f", self.tipSlider.value];
     [self setTipControllerValue];
 }
 

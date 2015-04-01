@@ -42,7 +42,8 @@ NSString *currencySymbol;
 - (void)viewDidLoad {
     currencySymbol = [[NSLocale currentLocale] objectForKey:NSLocaleCurrencySymbol];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Settings" style:UIBarButtonItemStylePlain target:self action:@selector(onSettingsButton)];
-
+    
+    [self.billTextFeild becomeFirstResponder];
     [super viewDidLoad];
     [self updateValues];
 }
@@ -67,21 +68,24 @@ NSString *currencySymbol;
     NSDate *dateOne = [defaultsForAppRestart valueForKey:@"Ten Mins After"];
     NSDate *dateTwo = [NSDate date];
     NSLog(@" Date one %@ date Two %@", dateOne, dateTwo);
-
+    
     switch ([dateOne compare:dateTwo]) {
         case NSOrderedAscending:
             // dateOne is earlier in time than dateTwo
+            NSLog(@" In NSOrderedAscending ");
             break;
         case NSOrderedSame:
             // The dates are the same
+            NSLog(@" In NSOrderedSame ");
             break;
         case NSOrderedDescending:
             // dateOne is later in time than dateTwo
-            self.billTextFeild.text = [NSString stringWithFormat:@"%f", [defaultsForAppRestart floatForKey:@"Last Bill Amount"]];
+            NSLog(@" In NSOrderedDescending ");
+            self.billTextFeild.text = [NSString stringWithFormat:@"%0.2f", [defaultsForAppRestart floatForKey:@"Last Bill Amount"]];
             break;
     }
-
-
+    
+    
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -139,8 +143,8 @@ NSString *currencySymbol;
 }
 
 - (void)onSettingsButton{
-
+    
     [self.navigationController pushViewController:[[SettingsViewController alloc] init] animated:YES];
-
+    
 }
 @end
