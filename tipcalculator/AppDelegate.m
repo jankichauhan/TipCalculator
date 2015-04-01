@@ -14,12 +14,12 @@
 @end
 
 @implementation AppDelegate
-
+TipViewController *vc;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     
-    TipViewController *vc = [[TipViewController alloc] init];
+    vc = [[TipViewController alloc] init];
     UINavigationController *nvc = [[UINavigationController alloc] initWithRootViewController:vc];
     
     self.window.rootViewController = nvc;
@@ -39,6 +39,7 @@
 
 - (void)applicationWillEnterForeground:(UIApplication *)application {
     // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"appDidBecomeActive" object:nil];
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {

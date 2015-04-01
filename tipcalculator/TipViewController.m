@@ -31,12 +31,21 @@
 
 NSString *currencySymbol;
 
+
 -(id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if(self){
         self.title = @"Tip Calculator";
     }
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(forAppRestart)
+                                                 name:@"appDidBecomeActive"
+                                               object:nil];
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self
+                                                    name:UIApplicationDidBecomeActiveNotification
+                                                  object:nil];
     return self;
 }
 - (void)viewDidLoad {
@@ -44,6 +53,7 @@ NSString *currencySymbol;
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Settings" style:UIBarButtonItemStylePlain target:self action:@selector(onSettingsButton)];
     
     [self.billTextFeild becomeFirstResponder];
+
     [super viewDidLoad];
     [self updateValues];
 }
@@ -64,28 +74,6 @@ NSString *currencySymbol;
 
 - (void)viewDidAppear:(BOOL)animated {
     NSLog(@"view did appear");
-    NSUserDefaults *defaultsForAppRestart = [NSUserDefaults standardUserDefaults];
-    NSDate *dateOne = [defaultsForAppRestart valueForKey:@"Ten Mins After"];
-    NSDate *dateTwo = [NSDate date];
-    NSLog(@" Date one %@ date Two %@", dateOne, dateTwo);
-    
-    switch ([dateOne compare:dateTwo]) {
-        case NSOrderedAscending:
-            // dateOne is earlier in time than dateTwo
-            NSLog(@" In NSOrderedAscending ");
-            break;
-        case NSOrderedSame:
-            // The dates are the same
-            NSLog(@" In NSOrderedSame ");
-            break;
-        case NSOrderedDescending:
-            // dateOne is later in time than dateTwo
-            NSLog(@" In NSOrderedDescending ");
-            self.billTextFeild.text = [NSString stringWithFormat:@"%0.2f", [defaultsForAppRestart floatForKey:@"Last Bill Amount"]];
-            break;
-    }
-    
-    
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -118,7 +106,40 @@ NSString *currencySymbol;
     [self updateValues];
 }
 
-
+- (void)forAppRestart{
+     NSLog(@"applicationWillEnterForeground");
+    NSUserDefaults *defaultsForAppRestart = [NSUserDefaults standardUserDefaults];
+    NSDate *dateOne = [defaultsForAppRestart valueForKey:@"Ten Mins After"];
+    NSDate *dateTwo = [NSDate date];
+    float lastBillAmount = [defaultsForAppRestart floatForKey:@"Last Bill Amount"];
+    NSLog(@" Date one %@ date Two %@", dateOne, dateTwo);
+    NSLog(@" Last Bill Amount @%0.2f", lastBillAmount);
+    
+    switch ([dateOne compare:dateTwo]) {
+        case NSOrderedAscending:
+            // dateOne is earlier in time than dateTwo
+            NSLog(@" In NSOrderedAscending ");
+            self.billTextFeild.text = @"";
+            break;
+        case NSOrderedSame:
+            // The dates are the same
+            NSLog(@" In NSOrderedSame ");
+            self.billTextFeild.text = @"";
+            break;
+        case NSOrderedDescending:
+            // dateOne is later in time than dateTwo
+            NSLog(@" In NSOrderedDescending @%0.2f", [defaultsForAppRestart floatForKey:@"Last Bill Amount"]);
+            
+            if(!(lastBillAmount == 0.0)){
+                NSLog(@" In if ");
+                self.billTextFeild.text = [NSString stringWithFormat:@"%0.2f", [defaultsForAppRestart floatForKey:@"Last Bill Amount"]];
+            }
+            else{
+                self.billTextFeild.text = @"";
+            }
+            break;
+    }
+}
 - (void)updateValues{
     
     NSDate *todayDate = [NSDate date];
