@@ -6,8 +6,12 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SettingsViewController">
             <connections>
+                <outlet property="defaultTipText" destination="dns-0s-2ld" id="v9L-tu-VfJ"/>
+                <outlet property="themeSwitch" destination="mUr-OD-mab" id="G11-Ud-NDR"/>
+                <outlet property="themeText" destination="zVx-Mk-zUE" id="ODW-Jf-qSn"/>
                 <outlet property="tip" destination="Dld-7z-o9P" id="yfJ-S1-8U8"/>
                 <outlet property="tipSlider" destination="SBA-8p-gis" id="lQk-Tm-3Gq"/>
+                <outlet property="tipText" destination="2dO-cG-UC0" id="JfE-Ll-9Lx"/>
                 <outlet property="view" destination="iN0-l3-epB" id="CSJ-Qa-Yb1"/>
             </connections>
         </placeholder>
@@ -17,7 +21,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Default Tip Percentage:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dns-0s-2ld">
-                    <rect key="frame" x="70" y="73" width="189" height="21"/>
+                    <rect key="frame" x="45" y="73" width="214" height="21"/>
                     <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
                     <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                     <nil key="highlightedColor"/>
@@ -40,9 +44,21 @@
                     <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                     <nil key="highlightedColor"/>
                 </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Dark Theme:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zVx-Mk-zUE">
+                    <rect key="frame" x="45" y="195" width="112" height="21"/>
+                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
+                    <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mUr-OD-mab">
+                    <rect key="frame" x="245" y="190" width="51" height="31"/>
+                    <connections>
+                        <action selector="themeChange:" destination="-1" eventType="valueChanged" id="zpF-Ch-0X4"/>
+                    </connections>
+                </switch>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-            <point key="canvasLocation" x="-85" y="245"/>
+            <point key="canvasLocation" x="13" y="267"/>
         </view>
     </objects>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">

@@ -6,14 +6,20 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="TipViewController">
             <connections>
+                <outlet property="billText" destination="1F3-fk-O6A" id="Chg-Dp-Sgy"/>
                 <outlet property="billTextFeild" destination="xEp-LV-HLN" id="Zsa-3J-c6z"/>
                 <outlet property="eachPays" destination="pQU-wc-Hh4" id="1La-o7-Mkm"/>
+                <outlet property="individualText" destination="XUO-Rb-ZtN" id="M6K-6h-Q3M"/>
                 <outlet property="noOfPeople" destination="FBi-9Y-REL" id="k5d-Bv-lRT"/>
                 <outlet property="noOfPeopleSlider" destination="UbS-eS-48w" id="m3a-tS-XyR"/>
+                <outlet property="noOfPeopleText" destination="DGW-db-0mN" id="dxi-lP-YPF"/>
                 <outlet property="tip" destination="5Oz-3V-r8A" id="BoY-75-5wZ"/>
-                <outlet property="tipLabel" destination="0Pp-4r-Fwk" id="SSo-M2-P3e"/>
+                <outlet property="tipAmountText" destination="lEu-lN-Uad" id="He3-Mr-Egc"/>
+                <outlet property="tipLabel" destination="0Pp-4r-Fwk" id="cfU-ho-2zA"/>
+                <outlet property="tipPerText" destination="slk-Yk-IZ8" id="twy-QC-Eom"/>
                 <outlet property="tipSlider" destination="M1W-T9-2mW" id="wBI-d2-yO7"/>
                 <outlet property="tipTotal" destination="v1G-qr-6SZ" id="2TS-Ln-Ukg"/>
+                <outlet property="totalText" destination="GoR-rc-Br6" id="Py0-P9-HwF"/>
                 <outlet property="view" destination="iN0-l3-epB" id="E6K-F5-ZYb"/>
             </connections>
         </placeholder>
@@ -22,12 +28,6 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Bill" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1F3-fk-O6A">
-                    <rect key="frame" x="24" y="90" width="29" height="21"/>
-                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
-                    <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                    <nil key="highlightedColor"/>
-                </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Tip Amount" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lEu-lN-Uad">
                     <rect key="frame" x="24" y="130" width="99" height="21"/>
                     <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
@@ -116,6 +116,12 @@
                     <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                     <nil key="highlightedColor"/>
                 </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Bill" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1F3-fk-O6A">
+                    <rect key="frame" x="24" y="90" width="29" height="21"/>
+                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
+                    <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                    <nil key="highlightedColor"/>
+                </label>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
             <rect key="contentStretch" x="0.10000000000000001" y="0.0" width="1" height="1"/>
@@ -123,7 +129,7 @@
             <connections>
                 <outletCollection property="gestureRecognizers" destination="ef7-Xy-nAr" appends="YES" id="Sgb-5x-v6V"/>
             </connections>
-            <point key="canvasLocation" x="207" y="202"/>
+            <point key="canvasLocation" x="-225" y="149"/>
         </view>
         <tapGestureRecognizer id="ef7-Xy-nAr">
             <connections>

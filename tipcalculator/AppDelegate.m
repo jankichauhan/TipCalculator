@@ -23,6 +23,7 @@ TipViewController *vc;
     UINavigationController *nvc = [[UINavigationController alloc] initWithRootViewController:vc];
     
     nvc.navigationBar.barTintColor = [UIColor colorWithRed:0.4 green:1.0 blue:0.6 alpha:1.0];
+    
     nvc.navigationBar.translucent = NO;
     [nvc.navigationBar setTitleTextAttributes:
      [NSDictionary dictionaryWithObjectsAndKeys:
