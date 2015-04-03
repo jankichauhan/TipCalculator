@@ -2,7 +2,7 @@
 
 This is an Andriod application for tip calculation based on input bill amount and selected tip percentage.
 
-Time Spent: 6 hours in total. 
+Time Spent: 7 hours in total. 
 
 Completed use stories:
 
