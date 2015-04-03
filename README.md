@@ -9,11 +9,11 @@ Completed use stories:
   * [x] Required: Adding Tip Calculator Setting Page for setting default tip amount. 
   * [x] Optional: Use locale for specific currency.
   * [x] Optional: Remember the bill amount across app restart.
+  * [x] Optional: Light Dark theme. 
+  * [x] Additional: Added slider bar instead of segment control.
+  * [x] Additional: Take "# of people" and computes individual amount. 
 
 Notes:
-
-Added silder for tip instead of segment.
-Also, added "# of People" parameter to divide the bill among entered number of people. 
 
 Walkthrough of all use stories:
 
