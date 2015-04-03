@@ -22,7 +22,21 @@ TipViewController *vc;
     vc = [[TipViewController alloc] init];
     UINavigationController *nvc = [[UINavigationController alloc] initWithRootViewController:vc];
     
+    nvc.navigationBar.barTintColor = [UIColor colorWithRed:0.4 green:1.0 blue:0.6 alpha:1.0];
+    nvc.navigationBar.translucent = NO;
+    [nvc.navigationBar setTitleTextAttributes:
+     [NSDictionary dictionaryWithObjectsAndKeys:
+      [UIFont fontWithName:@"helvetica" size:16],
+      NSFontAttributeName,
+      [UIColor colorWithRed:0.0 green:0.25 blue:0.5 alpha:1.0],
+      NSForegroundColorAttributeName,
+      nil]];
+    
+    vc.edgesForExtendedLayout = UIRectEdgeNone;
     self.window.rootViewController = nvc;
+    
+    self.window.backgroundColor = [UIColor whiteColor];
+    [self.window makeKeyAndVisible];
     
     return YES;
 }

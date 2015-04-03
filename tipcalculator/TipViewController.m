@@ -156,9 +156,13 @@ NSString *currencySymbol;
     float totalAmount = tipAmount + billAmount;
     float inidividualAmout = totalAmount/totalNoPeople;
     
-    self.tipLabel.text = [NSString stringWithFormat:@"%@ %0.2f", currencySymbol, tipAmount];
-    self.tipTotal.text = [NSString stringWithFormat:@"%@ %0.2f", currencySymbol, totalAmount];
-    self.eachPays.text = [NSString stringWithFormat:@"%@ %0.2f", currencySymbol, inidividualAmout];
+    NSNumberFormatter* numberFormatter = [[NSNumberFormatter alloc] init];
+    [numberFormatter setNumberStyle:NSNumberFormatterCurrencyStyle];
+   
+    self.tipLabel.text = [numberFormatter stringFromNumber:[[NSNumber alloc] initWithFloat:tipAmount]];
+    self.tipTotal.text = [numberFormatter stringFromNumber:[[NSNumber alloc] initWithFloat:totalAmount]];
+    self.eachPays.text = [numberFormatter stringFromNumber:[[NSNumber alloc] initWithFloat:inidividualAmout]];
+
     
     NSUserDefaults *defaultsForAppRestart = [NSUserDefaults standardUserDefaults];
     [defaultsForAppRestart setFloat:[self.billTextFeild.text floatValue] forKey:@"Last Bill Amount"];
