@@ -12,8 +12,11 @@ Completed use stories:
 
 Notes:
 
-Added silder for tip instead of segement.
+Added silder for tip instead of segment.
 Also, added "# of People" parameter to divide the bill among entered number of people. 
 
+Walkthrough of all use stories:
+
 ![Video Walkthrough](TipCalculator.gif)
+
 GIF created with [LiceCap](http://www.cockos.com/licecap/).
